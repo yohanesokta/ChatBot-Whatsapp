@@ -13,7 +13,9 @@
   "license": "ISC",
   "dependencies": {
     "@whiskeysockets/baileys": "^6.5.0",
+    "dotenv": "^16.3.1",
     "nodemon": "^3.0.2",
+    "openai": "^4.24.0",
     "qrcode-terminal": "^0.12.0",
     "wa-sticker-formatter": "^4.4.4"
   }
