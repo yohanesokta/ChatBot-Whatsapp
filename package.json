@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon",
-    "start": "tsc && node ./dist/",
+    "start": "node ./dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,6 +17,7 @@
     "nodemon": "^3.0.2",
     "openai": "^4.24.0",
     "qrcode-terminal": "^0.12.0",
+    "request": "^2.88.2",
     "wa-sticker-formatter": "^4.4.4"
   }
 }

@@ -4,6 +4,9 @@ import CreateSticker from "./components/CreateStiker";
 import { Sticker, createSticker, StickerTypes } from "wa-sticker-formatter";
 import MenuMessage from "./components/MenuMessage";
 import ChatGPT from "./components/ChatGptConnect";
+import loremipsum from "./components/LoremIpsum";
+import QRGenerate from "./components/QRGenerate";
+
 const keep_alive = require("../keep_alive.js");
 
 const Connect = async () => {
@@ -40,6 +43,12 @@ const Connect = async () => {
             await conn.sendMessage(id, {
                 text: String(mes),
             });
+        }
+        if (field.includes(".lorem")) {
+            loremipsum(conn, id, field);
+        }
+        if (field.includes(".qr")) {
+            QRGenerate(conn, id, field);
         }
 
         console.log(messageType);
