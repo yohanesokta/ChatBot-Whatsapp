@@ -8,6 +8,8 @@ const pesan: string = `
 *.lorem* + Panjang (angka) : generate kata dummy dengan panjang tertentu
 
 *.qr* + (url) : generate code qr otomatis
+
+*.cat* : Gambar Kucing Random
 `;
 
 const MenuMessage = () => {
@@ -15,7 +17,7 @@ const MenuMessage = () => {
         title: "*Kamu Tanya Hanes Menjawab*",
         text: "Kirim Beberapa Format Pesan Berikut : \n",
         colum: pesan,
-        footer: "\n*GDK TEAM PROJ | YhanzC Production*",
+        footer: "\n*Stay Creative 😜*",
     };
 
     const templateMessage = {

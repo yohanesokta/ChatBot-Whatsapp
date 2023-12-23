@@ -41,6 +41,7 @@ const MenuMessage_1 = __importDefault(require("./components/MenuMessage"));
 const ChatGptConnect_1 = __importDefault(require("./components/ChatGptConnect"));
 const LoremIpsum_1 = __importDefault(require("./components/LoremIpsum"));
 const QRGenerate_1 = __importDefault(require("./components/QRGenerate"));
+const TheCat_1 = __importDefault(require("./components/TheCat"));
 const keep_alive = require("../keep_alive.js");
 const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
     const { state, saveCreds } = yield (0, baileys_1.useMultiFileAuthState)("auth_info_baileys");
@@ -79,6 +80,9 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
         }
         if (field.includes(".lorem")) {
             (0, LoremIpsum_1.default)(conn, id, field);
+        }
+        if (field.includes(".cat")) {
+            (0, TheCat_1.default)(conn, id);
         }
         if (field.includes(".qr")) {
             (0, QRGenerate_1.default)(conn, id, field);
