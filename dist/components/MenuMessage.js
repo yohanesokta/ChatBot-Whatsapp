@@ -13,13 +13,13 @@ const pesan = `
 `;
 const MenuMessage = () => {
     const message = {
-        title: "*Kamu Tanya Hanes Bekerja*",
+        title: "*Kamu Tanya Hanes Menjawab*",
         text: "Kirim Beberapa Format Pesan Berikut : \n",
         colum: pesan,
-        footer: "",
+        footer: "\n*GDK TEAM PROJ | YhanzC Production*",
     };
     const templateMessage = {
-        text: `${message.title}\n${message.text}\n${message.colum}`,
+        text: `${message.title}\n${message.text}\n${message.colum}\n${message.footer}`,
     };
     return templateMessage;
 };

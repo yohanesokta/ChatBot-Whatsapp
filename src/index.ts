@@ -24,7 +24,7 @@ const Connect = async () => {
 
         const field = Object(messages[0].message).conversation;
         const messageType = Object.keys(Object(m.message))[0];
-
+        const Extended = String(m.message.extendedTextMessage?.text);
         if (field.includes(".menu")) {
             const Mess = MenuMessage();
             await conn.sendMessage(id, Mess);
@@ -48,7 +48,16 @@ const Connect = async () => {
             loremipsum(conn, id, field);
         }
         if (field.includes(".qr")) {
+            console.log(field);
             QRGenerate(conn, id, field);
+        }
+
+        if (Extended.includes(".qr")) {
+            QRGenerate(
+                conn,
+                id,
+                String(m.message.extendedTextMessage?.matchedText)
+            );
         }
 
         console.log(messageType);

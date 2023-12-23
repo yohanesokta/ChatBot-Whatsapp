@@ -47,13 +47,14 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
     const conn = (0, baileys_1.default)({ auth: state, printQRInTerminal: true });
     conn.ev.on("creds.update", saveCreds);
     conn.ev.on("messages.upsert", ({ messages }) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
+        var _a, _b, _c;
         const id = String(messages[0].key.remoteJid);
         const m = messages[0];
         if (!m.message)
             return;
         const field = Object(messages[0].message).conversation;
         const messageType = Object.keys(Object(m.message))[0];
+        const Extended = String((_a = m.message.extendedTextMessage) === null || _a === void 0 ? void 0 : _a.text);
         if (field.includes(".menu")) {
             const Mess = (0, MenuMessage_1.default)();
             yield conn.sendMessage(id, Mess);
@@ -77,11 +78,15 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
             (0, LoremIpsum_1.default)(conn, id, field);
         }
         if (field.includes(".qr")) {
+            console.log(field);
             (0, QRGenerate_1.default)(conn, id, field);
+        }
+        if (Extended.includes(".qr")) {
+            (0, QRGenerate_1.default)(conn, id, String((_b = m.message.extendedTextMessage) === null || _b === void 0 ? void 0 : _b.matchedText));
         }
         console.log(messageType);
         if (messageType == "imageMessage") {
-            const Caption = (_a = m.message.imageMessage) === null || _a === void 0 ? void 0 : _a.caption;
+            const Caption = (_c = m.message.imageMessage) === null || _c === void 0 ? void 0 : _c.caption;
             if (Caption === null || Caption === void 0 ? void 0 : Caption.includes(".stiker")) {
                 const sticker = (0, CreateStiker_1.default)(m);
                 conn.sendMessage(id, yield sticker);
