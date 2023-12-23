@@ -16,7 +16,7 @@ const Connect = async () => {
     const conn = makeWASocket({ auth: state, printQRInTerminal: true });
     conn.ev.on("creds.update", saveCreds);
 
-    conn.ev.on("messages.upsert", async ({ messages }) => {
+    conn.ev.on("messages.upsert", async ({ messages }: any) => {
         const id = String(messages[0].key.remoteJid);
         const m = messages[0];
 
@@ -25,6 +25,7 @@ const Connect = async () => {
         const field = Object(messages[0].message).conversation;
         const messageType = Object.keys(Object(m.message))[0];
         const Extended = String(m.message.extendedTextMessage?.text);
+        console.log(Extended);
         if (field.includes(".menu")) {
             const Mess = MenuMessage();
             await conn.sendMessage(id, Mess);
@@ -48,16 +49,14 @@ const Connect = async () => {
             loremipsum(conn, id, field);
         }
         if (field.includes(".qr")) {
-            console.log(field);
-            QRGenerate(conn, id, field, false);
+            QRGenerate(conn, id, field);
         }
 
         if (Extended.includes(".qr") && !Extended.includes("*.qr*")) {
             QRGenerate(
                 conn,
                 id,
-                String(m.message.extendedTextMessage?.matchedText),
-                true
+                String(m.message.extendedTextMessage?.matchedText)
             );
         }
 

@@ -55,6 +55,7 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
         const field = Object(messages[0].message).conversation;
         const messageType = Object.keys(Object(m.message))[0];
         const Extended = String((_a = m.message.extendedTextMessage) === null || _a === void 0 ? void 0 : _a.text);
+        console.log(Extended);
         if (field.includes(".menu")) {
             const Mess = (0, MenuMessage_1.default)();
             yield conn.sendMessage(id, Mess);
@@ -78,11 +79,10 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
             (0, LoremIpsum_1.default)(conn, id, field);
         }
         if (field.includes(".qr")) {
-            console.log(field);
-            (0, QRGenerate_1.default)(conn, id, field, false);
+            (0, QRGenerate_1.default)(conn, id, field);
         }
         if (Extended.includes(".qr") && !Extended.includes("*.qr*")) {
-            (0, QRGenerate_1.default)(conn, id, String((_b = m.message.extendedTextMessage) === null || _b === void 0 ? void 0 : _b.matchedText), true);
+            (0, QRGenerate_1.default)(conn, id, String((_b = m.message.extendedTextMessage) === null || _b === void 0 ? void 0 : _b.matchedText));
         }
         console.log(messageType);
         if (messageType == "imageMessage") {

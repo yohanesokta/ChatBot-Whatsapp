@@ -9,14 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-function QRGenerate(conn, id, field, extend = false) {
+function QRGenerate(conn, id, field) {
     return __awaiter(this, void 0, void 0, function* () {
         if (field == ".qr") {
             conn.sendMessage(id, {
                 text: "😫 *Dikandani kok angel to yooo*\n\n_tulis *. qr tanpa spasi* trus spasi trus link e opo_",
             });
         }
-        else if (field.includes(".qr") || extend) {
+        else {
             let data;
             if (field.includes(".qr")) {
                 data = field.replace(".qr", "");
