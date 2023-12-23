@@ -47,7 +47,7 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
     const conn = (0, baileys_1.default)({ auth: state, printQRInTerminal: true });
     conn.ev.on("creds.update", saveCreds);
     conn.ev.on("messages.upsert", ({ messages }) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         const id = String(messages[0].key.remoteJid);
         const m = messages[0];
         if (!m.message)
@@ -55,6 +55,8 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
         const field = Object(messages[0].message).conversation;
         const messageType = Object.keys(Object(m.message))[0];
         const Extended = String((_a = m.message.extendedTextMessage) === null || _a === void 0 ? void 0 : _a.text);
+        if (Extended.includes("*.qr*"))
+            return;
         console.log(Extended);
         if (field.includes(".menu")) {
             const Mess = (0, MenuMessage_1.default)();
@@ -82,11 +84,12 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
             (0, QRGenerate_1.default)(conn, id, field);
         }
         if (Extended.includes(".qr") && !Extended.includes("*.qr*")) {
-            (0, QRGenerate_1.default)(conn, id, String((_b = m.message.extendedTextMessage) === null || _b === void 0 ? void 0 : _b.matchedText));
+            if (String((_b = m.message.extendedTextMessage) === null || _b === void 0 ? void 0 : _b.matchedText).length > 1)
+                (0, QRGenerate_1.default)(conn, id, String((_c = m.message.extendedTextMessage) === null || _c === void 0 ? void 0 : _c.matchedText));
         }
         console.log(messageType);
         if (messageType == "imageMessage") {
-            const Caption = (_c = m.message.imageMessage) === null || _c === void 0 ? void 0 : _c.caption;
+            const Caption = (_d = m.message.imageMessage) === null || _d === void 0 ? void 0 : _d.caption;
             if (Caption === null || Caption === void 0 ? void 0 : Caption.includes(".stiker")) {
                 const sticker = (0, CreateStiker_1.default)(m);
                 conn.sendMessage(id, yield sticker);
