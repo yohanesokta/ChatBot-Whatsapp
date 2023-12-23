@@ -25,6 +25,8 @@ const Connect = async () => {
         const field = Object(messages[0].message).conversation;
         const messageType = Object.keys(Object(m.message))[0];
         const Extended = String(m.message.extendedTextMessage?.text);
+        if (Extended.includes("*.qr*")) return;
+
         console.log(Extended);
         if (field.includes(".menu")) {
             const Mess = MenuMessage();
