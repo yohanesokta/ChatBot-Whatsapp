@@ -79,10 +79,10 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
         }
         if (field.includes(".qr")) {
             console.log(field);
-            (0, QRGenerate_1.default)(conn, id, field);
+            (0, QRGenerate_1.default)(conn, id, field, false);
         }
-        if (Extended.includes(".qr")) {
-            (0, QRGenerate_1.default)(conn, id, String((_b = m.message.extendedTextMessage) === null || _b === void 0 ? void 0 : _b.matchedText));
+        if (Extended.includes(".qr") && !Extended.includes("*.qr*")) {
+            (0, QRGenerate_1.default)(conn, id, String((_b = m.message.extendedTextMessage) === null || _b === void 0 ? void 0 : _b.matchedText), true);
         }
         console.log(messageType);
         if (messageType == "imageMessage") {

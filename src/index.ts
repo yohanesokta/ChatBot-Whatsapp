@@ -49,14 +49,15 @@ const Connect = async () => {
         }
         if (field.includes(".qr")) {
             console.log(field);
-            QRGenerate(conn, id, field);
+            QRGenerate(conn, id, field, false);
         }
 
-        if (Extended.includes(".qr")) {
+        if (Extended.includes(".qr") && !Extended.includes("*.qr*")) {
             QRGenerate(
                 conn,
                 id,
-                String(m.message.extendedTextMessage?.matchedText)
+                String(m.message.extendedTextMessage?.matchedText),
+                true
             );
         }
 
