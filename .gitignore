@@ -3,3 +3,7 @@ auth_info_baileys
 /src/res/Buffer.jpeg
 /src/res/stiker.webp
 .env
+
+keep_alive.js
+.replit
+replit.nix
