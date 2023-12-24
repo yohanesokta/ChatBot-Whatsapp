@@ -12,6 +12,8 @@ const pesan = `
 *.qr* + (url) : generate code qr otomatis
 
 *.cat* : Gambar Kucing Random
+
+*.dog* : Nek iki khusus Dog Random 🐶
 `;
 const MenuMessage = () => {
     const message = {

@@ -7,6 +7,7 @@ import ChatGPT from "./components/ChatGptConnect";
 import loremipsum from "./components/LoremIpsum";
 import QRGenerate from "./components/QRGenerate";
 import TheCat from "./components/TheCat";
+import DogGenerate from "./components/TheDog";
 
 const keep_alive = require("../keep_alive.js");
 
@@ -56,6 +57,21 @@ const Connect = async () => {
         }
         if (field.includes(".qr")) {
             QRGenerate(conn, id, field);
+        }
+        if (field.includes(".dog")) {
+            conn.sendMessage(id, {
+                text: "_🤖 Mencari_ ...",
+            });
+            const data = DogGenerate();
+            data.then((response) => response.json())
+                .then((result) => {
+                    conn.sendMessage(id, {
+                        image: {
+                            url: result[0].url,
+                        },
+                    });
+                })
+                .catch((error) => console.error(error));
         }
 
         if (Extended.includes(".qr") && !Extended.includes("*.qr*")) {

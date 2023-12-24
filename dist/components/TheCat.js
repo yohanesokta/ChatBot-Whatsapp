@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
-const request = require("request");
 require("dotenv").config();
 // ambil variable api key
 const apiKey = process.env.THECAT_API;
