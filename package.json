@@ -18,6 +18,7 @@
     "openai": "^4.24.0",
     "qrcode-terminal": "^0.12.0",
     "request": "^2.88.2",
+    "typescript": "^5.3.3",
     "wa-sticker-formatter": "^4.4.4"
   }
 }
