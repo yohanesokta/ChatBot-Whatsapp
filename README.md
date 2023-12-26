@@ -36,3 +36,4 @@ Project ini dibuat untuk bikin api chatbot untuk whatsapp saya yang dapat melaku
 -   **[TheCat-API](https://thecatapi.com/)**
 -   [**OPEN AI** ( Chat GPT )](https://platform.openai.com/)
 -   [**QR CODE API**](https://goqr.me/api/)
+-   [**DOG API**](https://thedogapi.com/)
