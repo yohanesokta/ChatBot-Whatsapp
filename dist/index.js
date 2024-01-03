@@ -102,7 +102,7 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
         if (field.includes(".qr")) {
             (0, QRGenerate_1.default)(conn, id, field);
         }
-        if (field.includes(".dog")) {
+        if (field.includes(".dog") || Extended.includes(".dog")) {
             conn.sendMessage(id, {
                 text: "_🤖 Mencari_ ...",
             });
@@ -131,6 +131,7 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
         // Disini menampilkan mode debug pesan yaitu diambil antara field dan Extended text dari pesan
         const DEBUG = process.env.DEVMODE;
         if (DEBUG == "true") {
+            console.log("------------------------------------------");
             console.log(`Isi (Extended) (${id}) : "${Extended}"\n`);
             console.log(`Isi (Conversation) (${id}) : "${field}"`);
         }
