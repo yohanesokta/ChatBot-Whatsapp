@@ -43,7 +43,9 @@ const LoremIpsum_1 = __importDefault(require("./components/LoremIpsum"));
 const QRGenerate_1 = __importDefault(require("./components/QRGenerate"));
 const TheCat_1 = __importDefault(require("./components/TheCat"));
 const TheDog_1 = __importDefault(require("./components/TheDog"));
+require("dotenv/config");
 const keep_alive = require("../keep_alive.js");
+let mode = 1;
 const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
     const { state, saveCreds } = yield (0, baileys_1.useMultiFileAuthState)("auth_info_baileys");
     const conn = (0, baileys_1.default)({ auth: state, printQRInTerminal: true });
@@ -59,18 +61,23 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
         const Extended = String((_a = m.message.extendedTextMessage) === null || _a === void 0 ? void 0 : _a.text);
         if (Extended.includes("*.qr*"))
             return;
-        console.log(Extended);
-        if (field.includes(".menu")) {
+        if (field.includes(".menu") || Extended.includes(".menu")) {
             const Mess = (0, MenuMessage_1.default)();
             yield conn.sendMessage(id, Mess);
         }
-        if (field.includes(".stiker")) {
+        if (field.includes(".stiker") || Extended.includes(".stiker")) {
             yield conn.sendMessage(id, {
                 text: "*Haduhhhhhh*\n\nGini loo, Kirim gambar kemudian beri caption *.stiker* OK 👍",
             });
         }
-        if (field.includes(".gpt")) {
-            const pesan = field.replace(".gpt", "");
+        if (field.includes(".gpt") || Extended.includes(".gpt")) {
+            let pesan;
+            if (Extended.includes(".gpt")) {
+                pesan = Extended.replace(".gpt", "");
+            }
+            else {
+                pesan = field.replace(".gpt", "");
+            }
             yield conn.sendMessage(id, {
                 text: "🤖 *admin* sedang berfikir",
             });
@@ -79,10 +86,17 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
                 text: String(mes),
             });
         }
-        if (field.includes(".lorem")) {
-            (0, LoremIpsum_1.default)(conn, id, field);
+        if (field.includes(".lorem") || Extended.includes(".lorem")) {
+            let mess;
+            if (Extended.includes(".lorem")) {
+                mess = Extended;
+            }
+            else {
+                mess = field;
+            }
+            (0, LoremIpsum_1.default)(conn, id, mess);
         }
-        if (field.includes(".cat")) {
+        if (field.includes(".cat") || Extended.includes(".cat")) {
             (0, TheCat_1.default)(conn, id);
         }
         if (field.includes(".qr")) {
@@ -107,13 +121,22 @@ const Connect = () => __awaiter(void 0, void 0, void 0, function* () {
             if (String((_b = m.message.extendedTextMessage) === null || _b === void 0 ? void 0 : _b.matchedText).length > 1)
                 (0, QRGenerate_1.default)(conn, id, String((_c = m.message.extendedTextMessage) === null || _c === void 0 ? void 0 : _c.matchedText));
         }
-        console.log(messageType);
         if (messageType == "imageMessage") {
             const Caption = (_d = m.message.imageMessage) === null || _d === void 0 ? void 0 : _d.caption;
             if (Caption === null || Caption === void 0 ? void 0 : Caption.includes(".stiker")) {
                 const sticker = (0, CreateStiker_1.default)(m);
                 conn.sendMessage(id, yield sticker);
             }
+        }
+        // Disini menampilkan mode debug pesan yaitu diambil antara field dan Extended text dari pesan
+        const DEBUG = process.env.DEVMODE;
+        if (DEBUG == "true") {
+            console.log(`Isi (Extended) (${id}) : "${Extended}"\n`);
+            console.log(`Isi (Conversation) (${id}) : "${field}"`);
+        }
+        else if (mode > 0) {
+            console.info(`\nDEBUG MODE DINONAKTIFKAN | NYALAKAN DALAM ".env" | contoh | DEBUG = true (boolean)\n`);
+            mode = 0;
         }
     }));
 });
