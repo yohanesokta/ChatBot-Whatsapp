@@ -69,7 +69,7 @@ const Connect = async () => {
         if (field.includes(".qr")) {
             QRGenerate(conn, id, field);
         }
-        if (field.includes(".dog")) {
+        if (field.includes(".dog") || Extended.includes(".dog")) {
             conn.sendMessage(id, {
                 text: "_🤖 Mencari_ ...",
             });
